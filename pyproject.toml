@@ -1,0 +1,152 @@
+[tool.poetry]
+name = "fampay-backend"
+version = "0.0.0"
+description = "Fampy Assignment"
+authors = ["fampay <support@fampay.com>"]
+
+[tool.poetry.dependencies]
+python = "~3.9"
+Django = "~3.2.15"
+django-environ = "^0.9"
+django-sites = "^0.11"
+argon2-cffi = "^21.3"
+python-dotenv = "^0.21"
+django-cors-headers = "^3.13"
+
+
+# Extensions
+# -------------------------------------
+pytz = "^2022.2"
+
+# Models
+# -------------------------------------
+psycopg2-binary = "^2.9"
+Pillow = "^9.2"
+django-extensions = "^3.2"
+Werkzeug = "~2.2.2"
+django-uuid-upload-path = "^1.0"
+django-versatileimagefield = "^2.2"
+
+# REST APIs
+# -------------------------------------
+djangorestframework = "^3.13"
+drf-yasg = "^1.21"
+
+
+# Documentation
+# -------------------------------------
+mkdocs = "^1.2"
+pymdown-extensions = "^9.6"
+mkdocs-git-revision-date-localized-plugin = "^1.1.0"
+mkdocs-material = "^8.5.6"
+markdown-include = "^0.7.0"
+
+# Raven is the Sentry client
+# --------------------------
+raven = "^6.10"
+
+# LOGGING
+# -------------------------------------
+django-log-request-id = "^2.0"
+
+# Async Tasks
+# -------------------------------------
+celery = {extras = ["redis"], version = "~5.2.7"}
+flower = "~1.0.0"
+
+# Auth Stuff
+# -------------------------------------
+PyJWT = "^2.4"
+django-mail-templated = "^2.6"
+
+# Production settings
+# =====================================
+
+# Static Files and Media Storage
+# -------------------------------------
+gunicorn = "~20.1.0"
+django-storages = "^1.13"
+boto3 = "~1.24.67"
+
+# Caching
+# -------------------------------------
+django-redis = "^5.2"
+hiredis = "^2.0"
+
+# Basic Auth Protection
+# -------------------------------------
+django-auth-wall = "^0.3"
+
+
+# Logging
+# -------------------------------------
+newrelic = "~8.0.0.179"
+python-dateutil = "^2.8.2"
+
+
+[tool.poetry.dev-dependencies]
+pre-commit = "^2.20"
+
+
+# Documentation
+# -------------------------------------
+isort = "^5.10"
+black = "~22.8.0"
+flake8 = "^5.0"
+
+# Debugging
+# -------------------------------------
+django-debug-toolbar = "^3.6"
+ipdb = "^0.13"
+
+# Testing and coverage
+# -------------------------------------
+pytest = "^7.1"
+pytest-django = "^4.5"
+pytest-cov = "^3.0"
+django-dynamic-fixture = "^3.1"
+pytest-mock = "^3.8"
+mypy = "~0.971"
+django-stubs = "^1.12"
+
+# Versioning
+# -------------------------------------
+bump2version = "^1.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+known_first_party = "fampay"
+default_section = "THIRDPARTY"
+import_heading_firstparty = "fampay Stuff"
+import_heading_stdlib = "Standard Library"
+import_heading_thirdparty = "Third Party Stuff"
+skip_glob = ["*/migrations/**", "*/venv/**", "*/docs/**"]
+
+[tool.black]
+target_version = [ "py38", "py39" ]
+include = "\\.pyi?$"
+exclude = """
+/(\\.git/
+  |\\.eggs
+  |\\.hg
+  |__pycache__
+  |\\.cache
+  |\\.ipynb_checkpoints
+  |\\.mypy_cache
+  |\\.pytest_cache
+  |\\.tox
+  |venv
+  |node_modules
+  |_build
+  |buck-out
+  |build
+  |dist
+  |media
+  |templates
+  |locale
+)/
+"""
