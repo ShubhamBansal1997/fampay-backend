@@ -26,6 +26,9 @@ fmt:             ## Format code using black & isort.
 lint:            ## Run pep8, black, mypy linters.
 	${ENV_PREFIX}flake8 .
 	${ENV_PREFIX}black --check .
+	${ENV_PREFIX}pip install types-python-dateutil
+	${ENV_PREFIX}pip install types-requests
+	${ENV_PREFIX}mypy --install-types
 	${ENV_PREFIX}mypy --ignore-missing-imports ${PROJECT_NAME}/
 
 
