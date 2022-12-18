@@ -27,7 +27,7 @@ lint:            ## Run pep8, black, mypy linters.
 	${ENV_PREFIX}flake8 .
 	${ENV_PREFIX}black --check .
 	${ENV_PREFIX}mypy --ignore-missing-imports ${PROJECT_NAME}/
-	
+
 
 
 run_all:  ## Run all the servers in parallel, requires GNU Make
@@ -75,6 +75,12 @@ clean:  ## Remove all temporary files like pycache
 	find . -name \*.pyc -type f -ls -delete
 	find . -name __pycache__ -ls -delete
 
+.PHONY: docker
+docker:  ## Run docker-compose
+	cp .env.sample .env.docker
+	cp .env.db.sample .env.docker.db
+	docker-compose up
+
 # == Django Helpers
 # ===================================================
 djrun: install  ## Start Django server locally
@@ -100,7 +106,8 @@ shell:  ## Enter the django shell
 docs: virtualenv  ## Start documentation server locally
 	${ENV_PREFIX}mkdocs serve
 celery: install  ## Start celery worker
-	${ENV_PREFIX}celery -A $(PROJECT_NAME) worker -B -l INFO
+	${ENV_PREFIX}celery -A $(PROJECT_NAME) worker -B -l INFO --concurrency=4
+
 
 redis:  ## Start redis server
 	redis-server

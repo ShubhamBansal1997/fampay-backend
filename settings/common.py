@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     # "django.contrib.humanize",  # Useful template tags
     "fampay.base",
     "fampay.users",
+    "fampay.youtube",
     "rest_framework",  # http://www.django-rest-framework.org/
     "drf_yasg",
     "versatileimagefield",  # https://github.com/WGBH/django-versatileimagefield/
@@ -186,6 +187,7 @@ LANGUAGES = (("en", _("English")),)
 if USE_TZ:
     # Add timezone information to datetime displayed.
     # https://mounirmesselmeni.github.io/2014/11/06/date-format-in-django-admin/
+    # Third Party Stuff
     from django.conf.locale.en import formats as en_formats
 
     en_formats.DATETIME_FORMAT = "N j, Y, P (e)"
@@ -226,9 +228,7 @@ DJANGO_ADMIN_URL = env.str("DJANGO_ADMIN_URL", default="admin")
 EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend"
 )
-DEFAULT_FROM_EMAIL = env(
-    "DEFAULT_FROM_EMAIL", default="fampay <support@fampay.com>"
-)
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="fampay <support@fampay.com>")
 EMAIL_SUBJECT_PREFIX = env("EMAIL_SUBJECT_PREFIX", default="[fampay] ")
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
 SERVER_EMAIL = env("SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
@@ -408,10 +408,13 @@ LOGGING = {
 
 
 def get_release():
+    # Standard Library
     import os
 
+    # Third Party Stuff
     import raven
 
+    # fampay Stuff
     import fampay
 
     release = fampay.__version__
@@ -434,3 +437,6 @@ SITE_INFO = {
     "RELEASE_VERSION": RELEASE_VERSION,
     "IS_RAVEN_INSTALLED": True if RAVEN_CONFIG.get("dsn") else False,
 }
+
+YT_API_KEYS = env.list("YT_API_KEYS", default=[])
+YT_SEARCH_TERM = env("YT_SEARCH_TERM", default="cricket")

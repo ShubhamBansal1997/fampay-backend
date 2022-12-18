@@ -27,7 +27,7 @@ SITE_DOMAIN = env("SITE_DOMAIN")
 # Hosts/domain names that are valid for this site.
 # "*" matches anything, ".example.com" matches example.com and all subdomains
 # See https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[SITE_DOMAIN])
+ALLOWED_HOSTS = ["*"]
 
 # MANAGER CONFIGURATION
 # ------------------------------------------------------------------------------

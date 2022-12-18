@@ -15,7 +15,7 @@ Fampy Assignment
 Minimum requirements: **pip, python3.9, poetry, redis & [PostgreSQL 11][install-postgres]**, setup is tested on Mac OSX only.
 
 ```
-brew install python3 poetry libmagic postgres 
+brew install python3 poetry libmagic postgres
 ```
 
 [install-postgres]: http://www.gotealeaf.com/blog/how-to-install-postgresql-on-a-mac
@@ -31,8 +31,21 @@ Useful commands:
 - `make run` - start [django server](http://localhost:8000/)
 - `make deploy_docs` - deploy docs to server
 - `make test` - run the test locally with ipdb
+- `make docker` - setup docker and start [django server](http://localhost/)
 
 **NOTE:** Checkout `Makefile` for all the options available and how they do it.
+
+## API Endpoints
+|Endpoint                                | Purpose                                  |
+-----------------------------------------|------------------------------------------|
+|/api/video                              | Video List                               |
+|/api/video?offset=30&per_page=30        | Video List Paginated                     |
+|/api/video?ordering=video_published_at  | Video List Sorted By published_at (ASC)  |
+|/api/video?ordering=-video_published_at | Video List Sorted By published_at (DESC) |
+|/api/video?search=search_term           | Search Video using title and description |
+|/api/video/search?search_query=virat    | Full Text Search                         |
+
+Note: For detailed API description refer [Postman collection](Youtube.postman_collection.json)
 
 ## Managing dependencies
 
