@@ -14,7 +14,6 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.development")
 
 
 class CeleryCustomised(Celery):
-
     def on_configure(self):
         client = raven.Client(
             os.getenv("SENTRY_DSN"), environment=os.getenv("SENTRY_ENVIRONMENT")
@@ -39,4 +38,9 @@ app.config_from_object("django.conf:settings", namespace="CELERY")
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
-app.conf.beat_schedule = {}
+app.conf.beat_schedule = {
+    "yt-video-scheduler-run-every-10-sec": {
+        "task": "fampay.youtube.tasks.yt_video_scheduler",
+        "schedule": 10.0,
+    }
+}
